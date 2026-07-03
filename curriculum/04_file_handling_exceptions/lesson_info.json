@@ -1,0 +1,162 @@
+{
+  "module": "04_file_handling_exceptions",
+  "title": "File Handling & Exceptions",
+  "description": "Learn how to read from and write to files, process JSON, and gracefully handle runtime errors.",
+  "topics": [
+    {
+      "id": "reading_files",
+      "title": "Reading Files",
+      "file": "01_reading.py",
+      "tutorial": [
+        {
+          "type": "text",
+          "title": "Working with Files",
+          "content": "Most real-world programs need to read data from files (like logs, configs, or text).\nPython provides a built-in `open()` function to interact with files.\n\nThe safest way to open a file is using the `with` statement. It automatically\ncloses the file for you when the block ends, even if an error occurs!"
+        },
+        {
+          "type": "code",
+          "title": "Reading a File",
+          "content": "with open('example.txt', 'r') as file:\n    content = file.read()\n    print(content)",
+          "run": false
+        },
+        {
+          "type": "text",
+          "title": "Reading Methods",
+          "content": "1. .read()      → Reads the entire file as a single string.\n2. .readline()  → Reads just one line at a time.\n3. .readlines() → Returns a list where each element is a line.\n\nYou can also iterate over the file object directly:\n  with open('file.txt', 'r') as f:\n      for line in f:\n          print(line.strip())"
+        },
+        {
+          "type": "quiz",
+          "title": "Quick Check",
+          "question": "Which statement ensures a file is properly closed automatically?",
+          "options": ["open", "read", "with", "close"],
+          "answer": 2
+        }
+      ]
+    },
+    {
+      "id": "writing_files",
+      "title": "Writing Files",
+      "file": "02_writing.py",
+      "tutorial": [
+        {
+          "type": "text",
+          "title": "Writing Data",
+          "content": "To write to a file, open it in 'w' (write) or 'a' (append) mode.\n\nWARNING: 'w' mode will overwrite the file completely if it already exists!\n'a' mode will add your new text to the end of the existing file."
+        },
+        {
+          "type": "code",
+          "title": "Writing Example",
+          "content": "# Write mode (overwrites)\nwith open('output.txt', 'w') as file:\n    file.write('Hello, World!\\n')\n    file.write('This is a new line.\\n')\n\n# Append mode (adds to the end)\nwith open('output.txt', 'a') as file:\n    file.write('This is appended.\\n')",
+          "run": false
+        },
+        {
+          "type": "text",
+          "title": "Pro Tip: Encoding",
+          "content": "When dealing with text files, it's best practice to specify the encoding\n(usually 'utf-8'). This prevents errors when your text contains emojis\nor special characters.\n\n  with open('file.txt', 'w', encoding='utf-8') as f:\n      f.write('Python is great! 🚀')"
+        },
+        {
+          "type": "quiz",
+          "title": "Quick Check",
+          "question": "Which mode should you use to add text to an existing file without deleting its contents?",
+          "options": ["'w'", "'a'", "'r'", "'x'"],
+          "answer": 1
+        }
+      ]
+    },
+    {
+      "id": "json_data",
+      "title": "JSON Data",
+      "file": "03_json.py",
+      "tutorial": [
+        {
+          "type": "text",
+          "title": "What is JSON?",
+          "content": "JSON (JavaScript Object Notation) is a standard format for storing and\ntransporting data. It looks almost exactly like Python dictionaries and lists!\n\nPython has a built-in `json` module to handle it easily."
+        },
+        {
+          "type": "code",
+          "title": "JSON Serialization",
+          "content": "import json\n\ndata = {'name': 'Alice', 'age': 30, 'active': True}\n\n# Save dictionary to a JSON file\nwith open('data.json', 'w') as f:\n    json.dump(data, f, indent=4)\n\n# Load JSON file back into a dictionary\nwith open('data.json', 'r') as f:\n    loaded_data = json.load(f)\n    print(loaded_data['name'])",
+          "run": false
+        },
+        {
+          "type": "text",
+          "title": "dump/load vs dumps/loads",
+          "content": "Notice the 's' at the end:\n\njson.dump()  / json.load()   → Read/write directly from/to FILES.\njson.dumps() / json.loads()  → Convert to/from a STRING (the 's' stands for string)."
+        },
+        {
+          "type": "quiz",
+          "title": "Quick Check",
+          "question": "Which function saves a Python dictionary directly into a JSON file?",
+          "options": ["json.dump()", "json.dumps()", "json.load()", "json.loads()"],
+          "answer": 0
+        }
+      ]
+    },
+    {
+      "id": "exceptions_basics",
+      "title": "Exception Handling Basics",
+      "file": "04_exceptions.py",
+      "tutorial": [
+        {
+          "type": "text",
+          "title": "What is an Exception?",
+          "content": "An exception is an error that happens while the program is running.\nFor example, trying to divide by zero, or trying to open a file that\ndoesn't exist. Left unhandled, exceptions will crash your program."
+        },
+        {
+          "type": "code",
+          "title": "Try / Except",
+          "content": "try:\n    # Code that might cause an error\n    result = 10 / 0\nexcept ZeroDivisionError:\n    # Code that runs if the error happens\n    print('You cannot divide by zero!')\n\nprint('Program continues normally...')",
+          "run": true
+        },
+        {
+          "type": "text",
+          "title": "Catching Specific Errors",
+          "content": "You should catch specific errors rather than all errors blindly.\n\n  try:\n      with open('missing.txt', 'r') as f:\n          print(f.read())\n  except FileNotFoundError:\n      print('The file was not found!')\n\nIf you use a bare 'except:', it will catch everything, which can\nhide real bugs in your code."
+        },
+        {
+          "type": "quiz",
+          "title": "Quick Check",
+          "question": "What is the purpose of the `except` block?",
+          "options": ["To run code before `try`", "To handle an error gracefully", "To intentionally crash the program", "To ignore all warnings"],
+          "answer": 1
+        }
+      ]
+    },
+    {
+      "id": "advanced_exceptions",
+      "title": "Advanced Exceptions",
+      "file": "05_advanced_exceptions.py",
+      "tutorial": [
+        {
+          "type": "text",
+          "title": "Else and Finally",
+          "content": "The `try`/`except` structure can be extended with `else` and `finally`.\n\n  else: runs ONLY if the try block succeeds (no exception).\n  finally: runs NO MATTER WHAT (even if an exception happens or the function returns)."
+        },
+        {
+          "type": "code",
+          "title": "Else/Finally Example",
+          "content": "try:\n    value = int(input('Enter a number: '))\nexcept ValueError:\n    print('That is not a valid number!')\nelse:\n    print(f'Good job! You entered {value}')\nfinally:\n    print('This executes no matter what.')",
+          "run": false
+        },
+        {
+          "type": "text",
+          "title": "Raising Exceptions",
+          "content": "You can intentionally trigger an error using the `raise` keyword.\nThis is useful when validating input in your own functions.\n\n  def set_age(age):\n      if age < 0:\n          raise ValueError('Age cannot be negative!')\n      print(f'Age set to {age}')"
+        },
+        {
+          "type": "quiz",
+          "title": "Quick Check",
+          "question": "Which block executes regardless of whether an exception occurred or not?",
+          "options": ["try", "except", "else", "finally"],
+          "answer": 3
+        }
+      ]
+    }
+  ],
+  "difficulty": "Intermediate",
+  "prerequisites": [
+    "01_basics",
+    "02_data_structures"
+  ]
+}

@@ -1,0 +1,320 @@
+{
+  "module": "01_basics",
+  "title": "Python Basics",
+  "description": "Introduction to Python syntax, variables, and control flow.",
+  "topics": [
+    {
+      "id": "variables",
+      "title": "Variables & Data Types",
+      "file": "01_variables.py",
+      "tutorial": [
+        {
+          "type": "text",
+          "title": "What is a Variable?",
+          "content": "A variable is like a labeled box where you can store data.\nUnlike some other languages, Python doesn't require you to declare the type\nof variable ahead of time. You just assign a value to a name, and Python\nfigures it out automatically — this is called 'dynamic typing'."
+        },
+        {
+          "type": "code",
+          "title": "Creating Variables",
+          "content": "count = 10          # Integer\npi = 3.14           # Float\nname = 'AI'         # String\nis_active = True    # Boolean",
+          "run": true
+        },
+        {
+          "type": "text",
+          "title": "The 4 Basic Types",
+          "content": "int   → Whole numbers        → 0, 42, -7\nfloat → Decimal numbers      → 3.14, -0.5\nstr   → Text (in quotes)     → 'hello', \"world\"\nbool  → True or False only   → True, False\n\nPython chooses the type based on the value you assign."
+        },
+        {
+          "type": "text",
+          "title": "Pro Tip: Naming Conventions",
+          "content": "Use descriptive names! 'x' is bad, 'user_age' is good.\nPython uses snake_case (words_separated_by_underscores).\nVariable names cannot start with a number or contain spaces.\n\n  ✅  user_name = 'Alice'\n  ❌  1st_name  = 'Bob'      (starts with number)\n  ❌  my name   = 'Carol'    (contains space)"
+        },
+        {
+          "type": "text",
+          "title": "Common Mistake: = vs ==",
+          "content": "These look similar but mean very different things:\n\n  x = 5    →  Assignment  (store 5 in x)\n  x == 5   →  Comparison  (is x equal to 5? Returns True/False)\n\nMixing them up is one of the most common beginner mistakes!"
+        },
+        {
+          "type": "code",
+          "title": "Try It: Type Checking",
+          "content": "my_var = 42\nprint(type(my_var))  # <class 'int'>\n\nmy_var = 'Hello'\nprint(type(my_var))  # <class 'str'>",
+          "run": true
+        },
+        {
+          "type": "quiz",
+          "title": "Quick Check",
+          "question": "Which of the following is a valid Python variable name?",
+          "options": ["2nd_score", "my score", "high_score", "high-score"],
+          "answer": 2
+        }
+      ]
+    },
+    {
+      "id": "conditionals",
+      "title": "Conditionals (If...Else)",
+      "file": "02_conditionals.py",
+      "tutorial": [
+        {
+          "type": "text",
+          "title": "Making Decisions",
+          "content": "Programs need to make choices. We use 'if' statements to run code only\nwhen a certain condition is true.\n\nThink of it like a fork in the road — your program takes a different\npath depending on some condition."
+        },
+        {
+          "type": "code",
+          "title": "If-Elif-Else Example",
+          "content": "if value < 0:\n    print('Negative')\nelif value == 0:\n    print('Zero')\nelse:\n    print('Positive')",
+          "run": true
+        },
+        {
+          "type": "text",
+          "title": "Comparison Operators",
+          "content": "==   Equal to\n!=   Not equal to\n<    Less than\n>    Greater than\n<=   Less than or equal\n>=   Greater than or equal\n\nThese always return True or False."
+        },
+        {
+          "type": "text",
+          "title": "Pro Tip: Combining Conditions",
+          "content": "Use 'and' / 'or' to combine conditions:\n  if age >= 18 and has_license:\n      print('Can drive')\n\nUse 'not' to negate:\n  if not is_banned:\n      print('Welcome!')\n\nShort-circuit evaluation: Python stops early if the result is clear."
+        },
+        {
+          "type": "text",
+          "title": "Common Mistake: Indentation",
+          "content": "Python uses INDENTATION (spaces) to define code blocks.\nForgetting to indent is a very common error!\n\n  ✅  if x > 0:\n         print('positive')   # 4 spaces\n\n  ❌  if x > 0:\n      print('positive')   # Wrong! No indent after if"
+        },
+        {
+          "type": "code",
+          "title": "Try It: Grade Calculator",
+          "content": "score = 85\nif score >= 90:\n    grade = 'A'\nelif score >= 80:\n    grade = 'B'\nelse:\n    grade = 'C'\nprint(f'Grade: {grade}')",
+          "run": true
+        },
+        {
+          "type": "quiz",
+          "title": "Quick Check",
+          "question": "What will `print(10 > 5 and 3 < 1)` output?",
+          "options": ["True", "False", "Error", "None"],
+          "answer": 1
+        }
+      ]
+    },
+    {
+      "id": "loops",
+      "title": "Loops (For)",
+      "file": "03_loops.py",
+      "tutorial": [
+        {
+          "type": "text",
+          "title": "Repeating Actions",
+          "content": "Loops allow you to repeat a block of code multiple times.\nThe 'for' loop is great for iterating over a sequence of items.\n\nInstead of writing:\n  print(0)\n  print(1)\n  print(2)\n\nYou write:\n  for i in range(3):\n      print(i)"
+        },
+        {
+          "type": "code",
+          "title": "For Loop Example",
+          "content": "for i in range(5):\n    print(i)",
+          "run": true
+        },
+        {
+          "type": "text",
+          "title": "The range() Function",
+          "content": "range() generates a sequence of numbers.\n\n  range(5)       →  0, 1, 2, 3, 4\n  range(2, 6)    →  2, 3, 4, 5\n  range(0, 10, 2) →  0, 2, 4, 6, 8  (step of 2)\n\nNote: The end value is EXCLUDED."
+        },
+        {
+          "type": "text",
+          "title": "Iterating Over Lists",
+          "content": "You can also loop over any list directly:\n\n  fruits = ['apple', 'banana', 'cherry']\n  for fruit in fruits:\n      print(fruit)\n\nThis is much more readable than using indexes."
+        },
+        {
+          "type": "code",
+          "title": "Pro Tip: enumerate()",
+          "content": "# Get index AND value at the same time!\nfruits = ['apple', 'banana', 'cherry']\nfor idx, fruit in enumerate(fruits):\n    print(f'{idx}: {fruit}')",
+          "run": true
+        },
+        {
+          "type": "quiz",
+          "title": "Quick Check",
+          "question": "How many times does `for i in range(3, 7):` execute?",
+          "options": ["3", "4", "7", "10"],
+          "answer": 1
+        }
+      ]
+    },
+    {
+      "id": "while_loops",
+      "title": "Loops (While)",
+      "file": "04_while_loops.py",
+      "tutorial": [
+        {
+          "type": "text",
+          "title": "The While Loop",
+          "content": "A 'while' loop repeats as long as a condition remains true.\nUse it when you don't know how many times you need to loop.\n\nBe careful: ensure the condition eventually becomes false,\nor you'll get an infinite loop!"
+        },
+        {
+          "type": "code",
+          "title": "While Loop Example",
+          "content": "count = 3\nwhile count > 0:\n    print(count)\n    count -= 1\nprint('Done!')",
+          "run": true
+        },
+        {
+          "type": "text",
+          "title": "break and continue",
+          "content": "break   → Immediately exits the loop entirely\ncontinue → Skips the rest of the current iteration and goes to the next\n\nExample:\n  while True:\n      val = int(input('Enter number: '))\n      if val == 0:\n          break     # exits loop when 0 is entered\n      if val < 0:\n          continue  # skip negative numbers"
+        },
+        {
+          "type": "text",
+          "title": "For vs While — When to Use Which?",
+          "content": "Use FOR when:\n  ✅ You know the number of iterations\n  ✅ Iterating over a list, string, or range\n\nUse WHILE when:\n  ✅ You don't know how many times to repeat\n  ✅ Waiting for user input or a condition to change"
+        },
+        {
+          "type": "quiz",
+          "title": "Quick Check",
+          "question": "What keyword exits a loop immediately?",
+          "options": ["exit", "stop", "break", "return"],
+          "answer": 2
+        }
+      ]
+    },
+    {
+      "id": "functions",
+      "title": "Functions",
+      "file": "05_functions.py",
+      "tutorial": [
+        {
+          "type": "text",
+          "title": "Reusable Code",
+          "content": "Functions let you group code into reusable blocks.\nYou give them a name, pass in data (arguments), and can get back a result.\n\nWithout functions, you'd repeat the same code everywhere —\nfunctions follow the DRY principle: Don't Repeat Yourself!"
+        },
+        {
+          "type": "code",
+          "title": "Defining and Calling Functions",
+          "content": "def greet(name):\n    return f'Hello, {name}!'\n\nprint(greet('Alice'))\nprint(greet('Bob'))",
+          "run": true
+        },
+        {
+          "type": "text",
+          "title": "Parameters vs Arguments",
+          "content": "Parameters are variables listed in the function definition.\nArguments are the actual values passed when calling the function.\n\n  def add(a, b):       # a and b are PARAMETERS\n      return a + b\n\n  add(3, 4)            # 3 and 4 are ARGUMENTS"
+        },
+        {
+          "type": "text",
+          "title": "Default Arguments",
+          "content": "You can give parameters a default value.\nThat way, calling the function without that argument still works.\n\n  def power(base, exponent=2):\n      return base ** exponent\n\n  power(3)     →  9  (uses default exponent=2)\n  power(3, 3)  →  27 (overrides default)"
+        },
+        {
+          "type": "code",
+          "title": "Try It: Function with Default",
+          "content": "def power(base, exponent=2):\n    return base ** exponent\n\nprint(power(4))     # 16  (squared)\nprint(power(2, 10)) # 1024 (2^10)",
+          "run": true
+        },
+        {
+          "type": "quiz",
+          "title": "Quick Check",
+          "question": "Which keyword is used to send a value back from a function?",
+          "options": ["give", "send", "output", "return"],
+          "answer": 3
+        }
+      ]
+    },
+    {
+      "id": "input",
+      "title": "User Input",
+      "file": "06_user_input.py",
+      "tutorial": [
+        {
+          "type": "text",
+          "title": "Interacting with Users",
+          "content": "You can make your programs interactive by asking the user for input\nusing the input() function.\n\nImportant: input() ALWAYS returns a string, even if the user types a number.\nYou must convert it if you need a number."
+        },
+        {
+          "type": "code",
+          "title": "Input Example",
+          "content": "name = input('What is your name? ')\nprint(f'Hello, {name}!')",
+          "run": true
+        },
+        {
+          "type": "text",
+          "title": "Converting Input Types",
+          "content": "Since input() always returns a string, you must cast it:\n\n  age_str = input('Your age: ')\n  age = int(age_str)      # Convert to integer\n  year = float(input())   # Can chain directly\n\nAlways use try/except when converting user input —\nthe user might type something unexpected!"
+        },
+        {
+          "type": "quiz",
+          "title": "Quick Check",
+          "question": "What type does input() always return?",
+          "options": ["int", "float", "str", "bool"],
+          "answer": 2
+        }
+      ]
+    },
+    {
+      "id": "operators",
+      "title": "Arithmetic & Logical Operators",
+      "file": "07_operators.py",
+      "tutorial": [
+        {
+          "type": "text",
+          "title": "Python Operators",
+          "content": "Operators are special symbols in Python that carry out arithmetic\nor logical computation. They are the building blocks of every program."
+        },
+        {
+          "type": "code",
+          "title": "Arithmetic Operators",
+          "content": "x = 10\ny = 3\nprint(x + y)   # Addition:       13\nprint(x - y)   # Subtraction:    7\nprint(x * y)   # Multiplication: 30\nprint(x / y)   # Division:       3.333...\nprint(x // y)  # Floor Division: 3\nprint(x % y)   # Modulo:         1\nprint(x ** y)  # Exponentiation: 1000",
+          "run": true
+        },
+        {
+          "type": "text",
+          "title": "Floor Division and Modulo",
+          "content": "These two are very useful in programming:\n\n  //  Floor Division → result rounded DOWN to nearest int\n      17 // 5  =  3  (not 3.4)\n\n  %   Modulo → remainder after division\n      17 % 5   =  2  (17 = 5*3 + 2)\n\nPractical use: x % 2 == 0 tells you if x is even!"
+        },
+        {
+          "type": "code",
+          "title": "Logical Operators",
+          "content": "t = True\nf = False\nprint(t and f)   # False  (both must be True)\nprint(t or f)    # True   (at least one must be True)\nprint(not t)     # False  (flips the boolean)",
+          "run": true
+        },
+        {
+          "type": "quiz",
+          "title": "Quick Check",
+          "question": "What does `17 % 5` evaluate to?",
+          "options": ["3", "2", "3.4", "0"],
+          "answer": 1
+        }
+      ]
+    },
+    {
+      "id": "type_casting",
+      "title": "Type Casting (Conversion)",
+      "file": "08_type_casting.py",
+      "tutorial": [
+        {
+          "type": "text",
+          "title": "Type Conversion",
+          "content": "Sometimes you need to convert a variable from one data type to another.\nThis is called Type Casting.\n\n  int('42')   → 42\n  float('3.14') → 3.14\n  str(100)    → '100'\n  bool(0)     → False"
+        },
+        {
+          "type": "code",
+          "title": "Explicit Type Casting",
+          "content": "num_str = '123'\nnum_int = int(num_str)\nprint(num_int + 7)   # 130\n\nfloat_val = float('3.14')\nprint(float_val)     # 3.14\n\nstr_val = str(42)\nprint('Answer: ' + str_val)  # 'Answer: 42'",
+          "run": true
+        },
+        {
+          "type": "text",
+          "title": "Truthy and Falsy Values",
+          "content": "Every value in Python can be treated as True or False:\n\n  Falsy values: 0, 0.0, '', [], {}, None\n  Truthy values: everything else\n\nThis is useful in conditions:\n  if username:         # True if username is not empty\n      print('Hello!')"
+        },
+        {
+          "type": "code",
+          "title": "Truthiness Demo",
+          "content": "print(bool('hello'))  # True\nprint(bool(''))       # False\nprint(bool(0))        # False\nprint(bool(42))       # True\nprint(bool([]))       # False — empty list",
+          "run": true
+        },
+        {
+          "type": "quiz",
+          "title": "Quick Check",
+          "question": "What does bool(0) return?",
+          "options": ["True", "False", "0", "None"],
+          "answer": 1
+        }
+      ]
+    }
+  ],
+  "difficulty": "Beginner",
+  "prerequisites": []
+}

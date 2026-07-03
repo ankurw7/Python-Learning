@@ -1,0 +1,233 @@
+{
+    "module": "03_ai_concepts",
+    "title": "AI Concepts in Pure Python",
+    "description": "Fundamental concepts used in AI/ML, implemented without external libraries to understand the math.",
+    "topics": [
+        {
+            "id": "dot_product",
+            "title": "Dot Product",
+            "file": "01_dot_product.py",
+            "tutorial": [
+                {
+                    "type": "text",
+                    "title": "What is a Dot Product?",
+                    "content": "The dot product is a way to multiply two lists of numbers (vectors) together.\nIt's crucial in AI because it represents how similar two vectors are, or\nthe strength of a signal passing through a neuron.\n\nFormula:  A · B = A[0]*B[0] + A[1]*B[1] + ... + A[n-1]*B[n-1]"
+                },
+                {
+                    "type": "code",
+                    "title": "Dot Product Calculation",
+                    "content": "def dot(a, b):\n    return sum(x * y for x, y in zip(a, b))\n\ninputs  = [1.0, 2.0, 3.0]\nweights = [0.5, 0.5, 0.5]\n\nresult = dot(inputs, weights)\nprint(f'Dot product: {result}')  # 3.0",
+                    "run": true
+                },
+                {
+                    "type": "text",
+                    "title": "Why It Matters in AI",
+                    "content": "In a neural network:\n  • Inputs   → your data (e.g., pixel brightness values)\n  • Weights  → what the AI has learned from training\n  • Dot product = weighted sum = the neuron's 'decision'\n\nHigher dot product = the input is more aligned with what the\nneuron has learned to look for."
+                },
+                {
+                    "type": "text",
+                    "title": "Real-World Analogy",
+                    "content": "Imagine you're rating a movie with 3 criteria:\n  → Story quality:   score = 8\n  → Acting quality:  score = 6\n  → Visual effects:  score = 9\n\nYour personal weights for these criteria:\n  → Story:   weight = 0.6  (you care a lot)\n  → Acting:  weight = 0.3\n  → Visuals: weight = 0.1  (you care least)\n\nOverall rating = dot([8,6,9], [0.6,0.3,0.1]) = 7.1"
+                },
+                {
+                    "type": "quiz",
+                    "title": "Quick Check",
+                    "question": "What is the dot product of [1, 2] and [3, 4]?",
+                    "options": ["11", "7", "10", "14"],
+                    "answer": 0
+                }
+            ]
+        },
+        {
+            "id": "mse",
+            "title": "Mean Squared Error (MSE)",
+            "file": "02_mse.py",
+            "tutorial": [
+                {
+                    "type": "text",
+                    "title": "Measuring Error",
+                    "content": "How do we know if an AI model is wrong? We measure the 'loss' or 'error'.\nMSE calculates the average squared difference between what the model\npredicted and what the actual answer was."
+                },
+                {
+                    "type": "text",
+                    "title": "Why SQUARE the error?",
+                    "content": "Squaring the error has two key benefits:\n\n  1. Makes all errors positive  (so they don't cancel each other out)\n     Error of -5 and +5 → both become 25 ✅\n\n  2. Penalizes large errors MORE than small ones\n     Error of 2 → 4\n     Error of 4 → 16  (4x larger error = 4x2 = 16x bigger penalty!)\n\nThis forces the AI to care about big mistakes more than small ones."
+                },
+                {
+                    "type": "code",
+                    "title": "MSE Formula",
+                    "content": "predictions = [2.5, 0.0, 2.0]\nactuals     = [3.0, -0.5, 2.0]\n\nsquared_errors = [(p - a)**2 for p, a in zip(predictions, actuals)]\nmse = sum(squared_errors) / len(squared_errors)\n\nprint(f'Squared errors: {squared_errors}')\nprint(f'MSE: {mse:.4f}')",
+                    "run": true
+                },
+                {
+                    "type": "text",
+                    "title": "Interpreting MSE",
+                    "content": "  MSE = 0.0   → Perfect predictions (rarely happens!)\n  MSE small   → Model is doing well\n  MSE large   → Model needs more training\n\nDuring training, the AI's goal is to MINIMIZE the MSE by\nadjusting its weights — this is gradient descent!"
+                },
+                {
+                    "type": "quiz",
+                    "title": "Quick Check",
+                    "question": "Why do we SQUARE the errors in MSE?",
+                    "options": [
+                        "To make the math faster",
+                        "To make errors positive and penalize large errors more",
+                        "To make small errors larger",
+                        "It doesn't matter which operation we use"
+                    ],
+                    "answer": 1
+                }
+            ]
+        },
+        {
+            "id": "tokenization",
+            "title": "Tokenization",
+            "file": "03_tokenization.py",
+            "tutorial": [
+                {
+                    "type": "text",
+                    "title": "Computers Don't Read Words",
+                    "content": "Computers only understand numbers. To process text (like ChatGPT does),\nwe first chop it up into smaller pieces called 'tokens'.\nThese tokens are then converted into numbers the model can work with."
+                },
+                {
+                    "type": "text",
+                    "title": "Types of Tokenization",
+                    "content": "There are different ways to tokenize:\n\n  Word-level:      'Hello world' → ['Hello', 'world']\n  Character-level: 'Hello' → ['H', 'e', 'l', 'l', 'o']\n  Subword (GPT):   'unbelievable' → ['un', 'believ', 'able']\n\nGPT and most modern LLMs use subword tokenization to handle\nunknown words efficiently."
+                },
+                {
+                    "type": "code",
+                    "title": "Simple Tokenizer",
+                    "content": "def simple_tokenize(text):\n    # Lowercase and strip punctuation\n    clean = ''.join(c for c in text if c.isalnum() or c.isspace())\n    return clean.lower().split()\n\nsentence = 'Hello, AI World! This is Python.'\ntokens = simple_tokenize(sentence)\nprint(tokens)",
+                    "run": true
+                },
+                {
+                    "type": "text",
+                    "title": "Building a Vocabulary",
+                    "content": "After tokenizing, we build a vocabulary:\n  {'hello': 0, 'world': 1, 'ai': 2, ...}\n\nThen each word gets replaced by its number:\n  'hello world' → [0, 1]\n\nNow the AI can work with these numbers as vectors and matrices!"
+                },
+                {
+                    "type": "quiz",
+                    "title": "Quick Check",
+                    "question": "Why must text be converted to numbers for AI?",
+                    "options": [
+                        "To save memory",
+                        "Because computers can only do math on numbers",
+                        "To make searching faster",
+                        "Because Python doesn't support strings"
+                    ],
+                    "answer": 1
+                }
+            ]
+        },
+        {
+            "id": "activation",
+            "title": "Activation Functions",
+            "file": "04_activation_functions.py",
+            "tutorial": [
+                {
+                    "type": "text",
+                    "title": "Making Decisions",
+                    "content": "Activation functions decide whether a neuron should 'fire' or not.\nThey introduce non-linearity, which is what allows AI to learn\ncomplex patterns — without them, the whole network would just be\na single linear equation."
+                },
+                {
+                    "type": "text",
+                    "title": "ReLU — The Most Popular",
+                    "content": "ReLU (Rectified Linear Unit) is the most widely used activation:\n\n  ReLU(x) = max(0, x)\n\n  x = -5  → 0    (neuron doesn't fire)\n  x = 0   → 0    (neuron doesn't fire)\n  x = 3   → 3    (neuron fires at full strength)\n\nWhy it works: Simple, fast, and avoids the 'vanishing gradient' problem."
+                },
+                {
+                    "type": "code",
+                    "title": "ReLU Example",
+                    "content": "def relu(x):\n    return max(0, x)\n\ntest_values = [-5, -1, 0, 2, 7]\nfor v in test_values:\n    print(f'ReLU({v:3d}) = {relu(v)}')",
+                    "run": true
+                },
+                {
+                    "type": "text",
+                    "title": "Sigmoid — For Probabilities",
+                    "content": "Sigmoid maps any number to a value between 0 and 1.\nThis is useful for the output layer when you need a probability:\n\n  sigmoid(x) = 1 / (1 + e^(-x))\n\n  x = -10  → ~0.00  (very unlikely)\n  x = 0    →  0.50  (50/50)\n  x = 10   → ~1.00  (very likely)\n\nUsed in binary classification (spam / not spam)"
+                },
+                {
+                    "type": "code",
+                    "title": "Try It: Sigmoid",
+                    "content": "import math\n\ndef sigmoid(x):\n    return 1 / (1 + math.exp(-x))\n\nfor x in [-5, 0, 5]:\n    print(f'sigmoid({x:3d}) = {sigmoid(x):.4f}')",
+                    "run": true
+                },
+                {
+                    "type": "quiz",
+                    "title": "Quick Check",
+                    "question": "What does ReLU(-8) return?",
+                    "options": ["-8", "8", "0", "1"],
+                    "answer": 2
+                }
+            ]
+        },
+        {
+            "id": "gradient_descent",
+            "title": "Gradient Descent (Step)",
+            "file": "05_gradient_descent_step.py",
+            "tutorial": [
+                {
+                    "type": "text",
+                    "title": "The Learning Algorithm",
+                    "content": "Gradient descent is how AI learns. It iteratively adjusts its 'weights'\nto reduce the error between its prediction and the correct answer.\n\nAnother way to think of it: finding the lowest point in a hilly landscape\nby always stepping downhill."
+                },
+                {
+                    "type": "text",
+                    "title": "The Rolling Ball Analogy",
+                    "content": "Imagine you're blindfolded on a hilly surface and want to find the valley:\n\n  1. Feel which direction is downhill (this is the 'gradient')\n  2. Take a small step in that direction\n  3. Repeat until you can't go further down\n\nThe 'learning rate' controls HOW BIG each step is:\n  • Too large → overshoot the valley!\n  • Too small → takes forever to reach it\n  • Just right → converges to the minimum ✅"
+                },
+                {
+                    "type": "code",
+                    "title": "Weight Update Formula",
+                    "content": "# One step of gradient descent:\n# new_weight = old_weight - learning_rate * gradient\n\nweight = 5.0\nlearning_rate = 0.1\n\nfor step in range(5):\n    gradient = 2 * weight   # Example: gradient of w^2\n    weight = weight - learning_rate * gradient\n    print(f'Step {step+1}: weight = {weight:.4f}')",
+                    "run": true
+                },
+                {
+                    "type": "quiz",
+                    "title": "Quick Check",
+                    "question": "What happens if the learning rate is TOO LARGE?",
+                    "options": [
+                        "Training becomes very slow",
+                        "The model overshoots the minimum",
+                        "The model converges instantly",
+                        "Nothing changes"
+                    ],
+                    "answer": 1
+                }
+            ]
+        },
+        {
+            "id": "one_hot",
+            "title": "One-Hot Encoding",
+            "file": "06_one_hot_encoding.py",
+            "tutorial": [
+                {
+                    "type": "text",
+                    "title": "Categorical Data",
+                    "content": "We can't feed strings like 'cat' or 'dog' directly into a math equation.\nOne-Hot Encoding converts them into vectors of 0s and 1s that AI can use.\n\nOne column per category. The matching category gets a 1, all others get 0."
+                },
+                {
+                    "type": "text",
+                    "title": "Why Not Just Use Numbers?",
+                    "content": "You might think: why not just use cat=0, dog=1, bird=2?\n\nThe problem: the AI would assume dog(1) is 'between' cat(0) and bird(2),\nor that bird is 'twice' a dog. That's meaningless!\n\nOne-hot encoding avoids this by treating each category independently:\n  cat  = [1, 0, 0]\n  dog  = [0, 1, 0]\n  bird = [0, 0, 1]"
+                },
+                {
+                    "type": "code",
+                    "title": "Building One-Hot Vectors",
+                    "content": "def one_hot(categories, target):\n    return [1 if c == target else 0 for c in categories]\n\nanimals = ['cat', 'dog', 'bird']\nprint('cat: ', one_hot(animals, 'cat'))\nprint('dog: ', one_hot(animals, 'dog'))\nprint('bird:', one_hot(animals, 'bird'))",
+                    "run": true
+                },
+                {
+                    "type": "quiz",
+                    "title": "Quick Check",
+                    "question": "With categories ['red','green','blue'], what is the one-hot for 'green'?",
+                    "options": ["[1, 0, 0]", "[0, 1, 0]", "[0, 0, 1]", "[0, 1, 1]"],
+                    "answer": 1
+                }
+            ]
+        }
+    ],
+    "difficulty": "Intermediate",
+    "prerequisites": [
+        "01_basics",
+        "02_data_structures"
+    ]
+}

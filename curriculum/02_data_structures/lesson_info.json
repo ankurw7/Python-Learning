@@ -1,0 +1,255 @@
+{
+    "module": "02_data_structures",
+    "title": "Data Structures",
+    "description": "Core Python data structures: Lists, Dictionaries, Tuples, and Sets.",
+    "topics": [
+        {
+            "id": "lists",
+            "title": "Lists",
+            "file": "01_lists.py",
+            "tutorial": [
+                {
+                    "type": "text",
+                    "title": "What is a List?",
+                    "content": "A list is an ordered collection of items. You can put anything in a list:\nnumbers, strings, booleans, even other lists!\n\nLists are MUTABLE, meaning you can change them after creation.\nThis makes them one of the most versatile tools in Python."
+                },
+                {
+                    "type": "code",
+                    "title": "List Operations",
+                    "content": "fruits = ['apple', 'banana']\nfruits.append('cherry')     # Add to end\nprint(fruits[0])             # Access first item → 'apple'\nprint(len(fruits))           # Length → 3",
+                    "run": true
+                },
+                {
+                    "type": "text",
+                    "title": "Common List Methods",
+                    "content": ".append(x)    Add x to the end\n.insert(i, x) Insert x at position i\n.remove(x)    Remove first occurrence of x\n.pop()        Remove & return last item\n.sort()       Sort the list in place\n.reverse()    Reverse the list in place\n.index(x)     Return index of first x\nlen(list)     Get the length"
+                },
+                {
+                    "type": "text",
+                    "title": "Pro Tip: Slicing",
+                    "content": "Access multiple items at once with slicing:\n\n  nums = [0, 1, 2, 3, 4, 5]\n  nums[0:3]    →  [0, 1, 2]      (items at 0, 1, 2)\n  nums[2:]     →  [2, 3, 4, 5]   (from index 2 to end)\n  nums[:3]     →  [0, 1, 2]      (first 3 items)\n  nums[-1]     →  5              (last item)\n  nums[::-1]   →  [5, 4, 3, 2, 1, 0]  (reversed!)"
+                },
+                {
+                    "type": "code",
+                    "title": "Try It: List Slicing",
+                    "content": "nums = [0, 1, 2, 3, 4, 5]\nprint(nums[1:4])    # [1, 2, 3]\nprint(nums[::-1])   # Reversed!\nprint(nums[-2:])    # Last 2 items",
+                    "run": true
+                },
+                {
+                    "type": "quiz",
+                    "title": "Quick Check",
+                    "question": "Which method adds an item to the END of a list?",
+                    "options": [".insert()", ".add()", ".append()", ".push()"],
+                    "answer": 2
+                }
+            ]
+        },
+        {
+            "id": "dictionaries",
+            "title": "Dictionaries",
+            "file": "02_dictionaries.py",
+            "tutorial": [
+                {
+                    "type": "text",
+                    "title": "Key-Value Pairs",
+                    "content": "Dictionaries store data in key-value pairs, like a real dictionary\n(Word → Definition). They are optimized for fast lookups.\n\nUse a dictionary when you have labeled data:\n  ages = {'Alice': 30, 'Bob': 25}\n  print(ages['Alice'])  →  30"
+                },
+                {
+                    "type": "code",
+                    "title": "Dictionary Example",
+                    "content": "ages = {'Alice': 30, 'Bob': 25}\nprint(ages['Alice'])          # 30\nages['Charlie'] = 35          # Add new key\nprint(ages)",
+                    "run": true
+                },
+                {
+                    "type": "text",
+                    "title": "Safe Lookup with .get()",
+                    "content": "Accessing a key that doesn't exist causes a KeyError.\nUse .get() to avoid crashes:\n\n  ages = {'Alice': 30}\n  print(ages['Bob'])         # KeyError!\n  print(ages.get('Bob'))     # None (safe)\n  print(ages.get('Bob', 0)) # 0   (with default value)"
+                },
+                {
+                    "type": "text",
+                    "title": "Iterating Over Dictionaries",
+                    "content": "Three useful methods for iteration:\n\n  d = {'a': 1, 'b': 2}\n\n  d.keys()    →  dict_keys(['a', 'b'])\n  d.values()  →  dict_values([1, 2])\n  d.items()   →  dict_items([('a',1), ('b',2)])\n\nMost common: loop over .items() to get key and value together:\n  for key, value in d.items():\n      print(f'{key} = {value}')"
+                },
+                {
+                    "type": "code",
+                    "title": "Try It: Dict Methods",
+                    "content": "scores = {'Alice': 95, 'Bob': 82, 'Carol': 78}\nfor name, score in scores.items():\n    print(f'{name}: {score}')\n\nprint('Keys:', list(scores.keys()))\nprint('Unknown:', scores.get('Dave', 'not found'))",
+                    "run": true
+                },
+                {
+                    "type": "quiz",
+                    "title": "Quick Check",
+                    "question": "What does `d.get('missing_key', 'default')` return if the key doesn't exist?",
+                    "options": ["KeyError", "None", "'default'", "False"],
+                    "answer": 2
+                }
+            ]
+        },
+        {
+            "id": "sets_tuples",
+            "title": "Sets & Tuples",
+            "file": "03_sets_tuples.py",
+            "tutorial": [
+                {
+                    "type": "text",
+                    "title": "Sets vs Tuples",
+                    "content": "SETS are unordered collections of UNIQUE items (no duplicates).\n  → Use when you care about membership, not order.\n  → Created with curly braces: {1, 2, 3}\n\nTUPLES are ordered collections that CANNOT be changed (immutable).\n  → Use for fixed data that shouldn't change.\n  → Created with parentheses: (10, 20)"
+                },
+                {
+                    "type": "code",
+                    "title": "Set & Tuple Example",
+                    "content": "unique_nums = {1, 2, 2, 3, 3}  # Duplicates removed!\nprint(unique_nums)             # {1, 2, 3}\n\npoint = (10, 20)               # Immutable!\nprint(point[0])                # 10",
+                    "run": true
+                },
+                {
+                    "type": "text",
+                    "title": "Set Operations (Like Math!)",
+                    "content": "Sets support mathematical operations:\n\n  a = {1, 2, 3, 4}\n  b = {3, 4, 5, 6}\n\n  a | b   →  {1,2,3,4,5,6}   (Union: all items)\n  a & b   →  {3, 4}          (Intersection: common items)\n  a - b   →  {1, 2}          (Difference: in a but not b)\n\nUseful for: finding unique visitors, common friends, etc."
+                },
+                {
+                    "type": "code",
+                    "title": "Try It: Set Operations",
+                    "content": "team_a = {'Alice', 'Bob', 'Carol'}\nteam_b = {'Carol', 'Dave', 'Eve'}\n\nprint('All members:', team_a | team_b)\nprint('In both teams:', team_a & team_b)\nprint('Only in team A:', team_a - team_b)",
+                    "run": true
+                },
+                {
+                    "type": "quiz",
+                    "title": "Quick Check",
+                    "question": "What does `{1, 2, 2, 3}` evaluate to in Python?",
+                    "options": ["{1, 2, 2, 3}", "{1, 2, 3}", "Error", "[1, 2, 3]"],
+                    "answer": 1
+                }
+            ]
+        },
+        {
+            "id": "comprehensions",
+            "title": "List Comprehensions",
+            "file": "04_comprehensions.py",
+            "tutorial": [
+                {
+                    "type": "text",
+                    "title": "Pythonic Loops",
+                    "content": "List comprehension is a concise way to create lists.\nIt replaces simple 'for' loops with a single line of code.\n\n  Traditional:\n    squares = []\n    for x in range(5):\n        squares.append(x*x)\n\n  Comprehension:\n    squares = [x*x for x in range(5)]\n\nSame result, more Pythonic!"
+                },
+                {
+                    "type": "code",
+                    "title": "Comprehension Example",
+                    "content": "squares = [x*x for x in range(5)]\nprint(squares)  # [0, 1, 4, 9, 16]\n\n# With a filter condition:\nevens = [x for x in range(10) if x % 2 == 0]\nprint(evens)    # [0, 2, 4, 6, 8]",
+                    "run": true
+                },
+                {
+                    "type": "text",
+                    "title": "Dict Comprehensions Too!",
+                    "content": "The same pattern works for dictionaries:\n\n  squares_dict = {x: x*x for x in range(5)}\n  # {0: 0, 1: 1, 2: 4, 3: 9, 4: 16}\n\nAnd sets:\n  unique_lengths = {len(word) for word in ['hi', 'hello', 'hi']}\n  # {2, 5}"
+                },
+                {
+                    "type": "quiz",
+                    "title": "Quick Check",
+                    "question": "What does `[x*2 for x in range(3)]` produce?",
+                    "options": ["[0, 2, 4]", "[2, 4, 6]", "[1, 2, 3]", "[0, 1, 2]"],
+                    "answer": 0
+                }
+            ]
+        },
+        {
+            "id": "stacks_queues",
+            "title": "Stacks & Queues",
+            "file": "05_stacks_queues.py",
+            "tutorial": [
+                {
+                    "type": "text",
+                    "title": "LIFO and FIFO",
+                    "content": "Stacks (LIFO: Last-In, First-Out) and Queues (FIFO: First-In, First-Out)\nare fundamental data structures.\n\n  Stack  → Like a stack of plates. You add/remove from the TOP.\n  Queue  → Like a line at a store. First in, first served."
+                },
+                {
+                    "type": "code",
+                    "title": "Stack with a List",
+                    "content": "stack = []\nstack.append('A')   # Push\nstack.append('B')\nstack.append('C')\nprint(stack.pop())  # Pop → 'C' (last in, first out)\nprint(stack)",
+                    "run": true
+                },
+                {
+                    "type": "text",
+                    "title": "Queue with collections.deque",
+                    "content": "For queues, use collections.deque — it's more efficient than a list\nfor adding/removing from the left:\n\n  from collections import deque\n  q = deque()\n  q.append('A')       # Enqueue\n  q.append('B')\n  q.popleft()         # Dequeue → 'A' (first in, first out)\n\nReal uses: browser history (stack), printer queue (queue)"
+                },
+                {
+                    "type": "quiz",
+                    "title": "Quick Check",
+                    "question": "In a STACK, which item is removed first?",
+                    "options": ["The oldest item", "The newest item", "A random item", "The smallest item"],
+                    "answer": 1
+                }
+            ]
+        },
+        {
+            "id": "string_methods",
+            "title": "String Methods",
+            "file": "06_string_methods.py",
+            "tutorial": [
+                {
+                    "type": "text",
+                    "title": "Manipulating Text",
+                    "content": "Strings in Python come with many useful methods for searching,\nsplitting, joining, and transforming text.\n\nStrings are IMMUTABLE — methods return a new string, they don't\nchange the original."
+                },
+                {
+                    "type": "code",
+                    "title": "Common String Methods",
+                    "content": "s = '  hello world  '\nprint(s.upper())          # '  HELLO WORLD  '\nprint(s.strip())          # 'hello world'  (removes whitespace)\nprint(s.strip().title())  # 'Hello World'",
+                    "run": true
+                },
+                {
+                    "type": "text",
+                    "title": "More Essential Methods",
+                    "content": "s = 'hello world'\n\n.split()           →  ['hello', 'world']\n.split(',')        →  split by comma\n.replace('o','0')  →  'hell0 w0rld'\n.startswith('he')  →  True\n.endswith('ld')    →  True\n.find('world')     →  6  (index of match)\n'_'.join(['a','b','c'])  →  'a_b_c'"
+                },
+                {
+                    "type": "code",
+                    "title": "Try It: String Processing",
+                    "content": "sentence = 'Python is awesome for AI!'\nwords = sentence.lower().split()\nprint(words)\nprint('Count of words:', len(words))\nprint('Joined:', '-'.join(words))",
+                    "run": true
+                },
+                {
+                    "type": "quiz",
+                    "title": "Quick Check",
+                    "question": "What does `'hello'.upper()` return?",
+                    "options": ["'Hello'", "'HELLO'", "'hello'", "None"],
+                    "answer": 1
+                }
+            ]
+        },
+        {
+            "id": "nested_data",
+            "title": "Nested Data Structures",
+            "file": "07_nested_data.py",
+            "tutorial": [
+                {
+                    "type": "text",
+                    "title": "Data within Data",
+                    "content": "You can nest lists inside lists (like a 2D matrix) or dictionaries\ninside dictionaries. This is very common for representing complex,\nhierarchical data — like JSON from a web API."
+                },
+                {
+                    "type": "code",
+                    "title": "Accessing Nested Data",
+                    "content": "matrix = [[1, 2, 3],\n          [4, 5, 6],\n          [7, 8, 9]]\n\nprint(matrix[0])     # [1, 2, 3]  (first row)\nprint(matrix[1][2])  # 6          (row 1, col 2)",
+                    "run": true
+                },
+                {
+                    "type": "text",
+                    "title": "Nested Dictionaries (Real-World!)",
+                    "content": "This pattern is everywhere — JSON APIs return data like this:\n\n  user = {\n      'name': 'Alice',\n      'scores': [95, 88, 92],\n      'address': {\n          'city': 'London',\n          'zip': 'EC1A'\n      }\n  }\n\n  user['address']['city']  →  'London'\n  user['scores'][0]        →  95"
+                },
+                {
+                    "type": "quiz",
+                    "title": "Quick Check",
+                    "question": "Given `d = {'a': {'b': 42}}`, how do you access 42?",
+                    "options": ["d['a']['b']", "d['b']", "d[0][1]", "d.a.b"],
+                    "answer": 0
+                }
+            ]
+        }
+    ],
+    "difficulty": "Beginner",
+    "prerequisites": [
+        "01_basics"
+    ]
+}
